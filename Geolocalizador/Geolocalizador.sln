@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGEO", "API_Geolocalizador\APIGEO.csproj", "{AB042FE0-BCED-4EFF-A96F-9B020869FEFA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14B07F50-35FE-4220-9885-48B83C345823}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geocodificador", "Servicio_Geocodificador\Geocodificador.csproj", "{CC544530-9A9F-4118-8A7A-74324AEBB4D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB042FE0-BCED-4EFF-A96F-9B020869FEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB042FE0-BCED-4EFF-A96F-9B020869FEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB042FE0-BCED-4EFF-A96F-9B020869FEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB042FE0-BCED-4EFF-A96F-9B020869FEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC544530-9A9F-4118-8A7A-74324AEBB4D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC544530-9A9F-4118-8A7A-74324AEBB4D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC544530-9A9F-4118-8A7A-74324AEBB4D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC544530-9A9F-4118-8A7A-74324AEBB4D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA37D200-1D91-428A-92B5-E11F46AE503D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  geoApi:
+    build: ./API_Geolocalizador
+    image: api-geo
+    container_name: api.geo
+    ports:
+      - '5000:90'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - RABBIT_HOSTNAME=rabbitmq
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - mysql_db
+
+  geocodificadorWorker:
+    build: ./Servicio_Geocodificador
+    image: worker-geo
+    container_name: worker.geo
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RABBIT_HOSTNAME=rabbitmq
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+      - mysql_db
+
+  mysql_db:
+    image: mysql:latest
+    volumes:
+      - "./.mysql-data/db:/var/lib/mysql"
+    ports:
+      - '3310:3306'
+    expose:
+      - '3310'
+    environment:
+      - MYSQL_ROOT_PASSWORD=Ab12456
+      - MYSQL_DATABASE=mydbname
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=Ab12456
+    restart: on-failure
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    hostname: my-rabbit
+    container_name: rabbitmq
+    volumes:
+      - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+      - ./rabbitmq/logs:/var/log/rabbitmq/log
+    ports:
+      - '5672:5672'
+      - '15672:15672'
