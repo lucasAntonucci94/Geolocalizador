@@ -1,0 +1,8 @@
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\bin\Debug\netstandard2.0\Common.deps.json
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\bin\Debug\netstandard2.0\Common.dll
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\bin\Debug\netstandard2.0\Common.pdb
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\obj\Debug\netstandard2.0\Common.csprojAssemblyReference.cache
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\obj\Debug\netstandard2.0\Common.AssemblyInfoInputs.cache
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\obj\Debug\netstandard2.0\Common.AssemblyInfo.cs
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\obj\Debug\netstandard2.0\Common.dll
+C:\Users\antonuchos\source\repos\MS.NetCore\Repo.Geolocalizador\Geolocalizador\Common\obj\Debug\netstandard2.0\Common.pdb

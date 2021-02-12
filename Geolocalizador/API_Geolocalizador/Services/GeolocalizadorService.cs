@@ -2,6 +2,7 @@
 using APIGEO.DTO;
 using APIGEO.Interfaces;
 using APIGEO.Models;
+using Common.Mensajes;
 using Microsoft.Extensions.Logging;
 using MS.APIGEO;
 using System;
@@ -24,6 +25,7 @@ namespace APIGEO.Services
 
         public int SaveGeoRequest(GeolocalizacionDTO body) 
         {
+
             GeolocalizacionDB geolocalizacion = new GeolocalizacionDB()
             {
                 Calle = body.Calle,
@@ -40,42 +42,27 @@ namespace APIGEO.Services
             _db.Geolocalizacion.Add(geolocalizacion);
             _db.SaveChanges();
 
+            return geolocalizacion.Id;
 
-            return 1;
         }
 
-        public void PublishGeolocalizacion(PeticionGeolocalizacion request)
+        public GeocodificacionDTO GetGeocodificacionById(int id) 
         {
 
-            //guardar el pedido de geolocalizacion en DB utilizando pomelo
+            GeolocalizacionDB dbGeo = _db.Geolocalizacion
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
 
-            //SE ENVIAN LOS DATOS AL A COLA CORRESPONDIENTE
+            GeocodificacionDTO geocodificacion = new GeocodificacionDTO()
+            {
+                Id = dbGeo.Id,
+                Latitud = dbGeo.Latitud,
+                Longitud = dbGeo.Latitud,
+                Estado = dbGeo.Estado
+            };
 
-            //var factory = new ConnectionFactory() { HostName = "localhost"};
-            //using (var connection = factory.CreateConnection())
-            //using (var channel = connection.CreateModel())
-            //{
-            //    channel.QueueDeclare(queue: "adwadwad",
-            //                         durable: false,
-            //                         exclusive: false,
-            //                         autoDelete: false,
-            //                         arguments: null);
-
-            //    string message = "Hello World!";
-            //    var respose = Encoding.UTF8.GetBytes(message);
-
-            //    channel.BasicPublish(exchange: "",
-            //                         routingKey: "hello",
-            //                         basicProperties: null,
-            //                         body: respose);
-            //    Console.WriteLine(" [x] Sent {0}", message);
-            //}
-
-            //Console.WriteLine(" Press [enter] to exit.");
-            //Console.ReadLine();
-
-            //servicio.Publish(dato);  - Al publicar deberia obtener un id para devolver.
+            return geocodificacion;
+   
         }
-
     }
 }

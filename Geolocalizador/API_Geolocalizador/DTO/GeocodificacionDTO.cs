@@ -7,10 +7,10 @@ namespace APIGEO.DTO
 {
     public class GeocodificacionDTO
     {
-        public string Id { get; set; }
-        public int Latitud { get; set; }
+        public int Id { get; set; }
+        public string Latitud { get; set; }
         public string Longitud { get; set; }
-        public int Estado { get; set; }
+        public string Estado { get; set; }
 
     }
 }

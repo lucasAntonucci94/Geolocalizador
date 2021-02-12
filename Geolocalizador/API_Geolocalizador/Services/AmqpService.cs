@@ -1,6 +1,5 @@
 ﻿using APIGEO.Data;
 using APIGEO.DTO;
-using APIGEO.Helpers;
 using APIGEO.Interfaces;
 using APIGEO.Models;
 using Microsoft.Extensions.Logging;
@@ -13,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Helpers;
+using Common.Mensajes;
 
 namespace APIGEO.Services
 {

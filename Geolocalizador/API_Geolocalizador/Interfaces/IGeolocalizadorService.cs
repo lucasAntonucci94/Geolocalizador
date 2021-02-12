@@ -1,4 +1,5 @@
 ﻿using APIGEO.DTO;
+using Common.Mensajes;
 using MS.APIGEO;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace APIGEO.Interfaces
     public interface IGeolocalizadorService
     {
         int SaveGeoRequest(GeolocalizacionDTO body);
-        void PublishGeolocalizacion(PeticionGeolocalizacion request);
+        GeocodificacionDTO GetGeocodificacionById(int id);
     }
 }

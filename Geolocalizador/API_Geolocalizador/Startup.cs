@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APIGEO.Data;
-using APIGEO.Helpers;
+using Common.Helpers;
 using APIGEO.Interfaces;
 using APIGEO.Services;
 using Microsoft.AspNetCore.Builder;
@@ -36,7 +36,7 @@ namespace APIGEO
              options.UseSqlite(Configuration.GetConnectionString("GeoDataBase")));
 
             services.AddTransient<IGeolocalizadorService, GeolocalizadorService>();
-            services.Configure<AmqpInfo>(Configuration.GetSection("amqp"));
+            services.Configure<AmqpInfo>(Configuration.GetSection("Amqp"));
             services.AddSingleton<AmqpService>();
         }
 
@@ -56,7 +56,9 @@ namespace APIGEO
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller}/{action}/{id?}");
             });
         }
     }

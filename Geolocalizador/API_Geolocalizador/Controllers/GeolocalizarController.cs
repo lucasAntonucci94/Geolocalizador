@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using APIGEO.DTO;
 using APIGEO.Interfaces;
 using APIGEO.Services;
+using Common.Mensajes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -12,8 +14,8 @@ using RabbitMQ.Client;
 
 namespace MS.APIGEO.Controllers
 {
+    [Route("api")]
     [ApiController]
-    [Route("[controller]")]
     public class GeolocalizarController : ControllerBase
     {
 
@@ -29,46 +31,72 @@ namespace MS.APIGEO.Controllers
         }
 
 
-
+        [Route("Geolocalizar")]
         [HttpPost]
         public ActionResult Geolocalizar(GeolocalizacionDTO body)
-       {
+        {
+            try
+            {
+
+                if (body == null)
+                {
+                    return BadRequest();
+                }
+
+                var id = _service.SaveGeoRequest(body);
+
+                PeticionGeolocalizacion request = new PeticionGeolocalizacion()
+                {
+                    Id = id,
+                    Calle = body.Calle,
+                    Numero = body.Numero,
+                    Ciudad = body.Ciudad,
+                    Codigo_postal = body.Codigo_postal,
+                    Provincia = body.Provincia,
+                    Pais = body.Pais
+                };
+
+                _amqp.PublishGeolocalizacion(request);
 
 
-            if (body == null) {
-                return BadRequest();
+                return Ok(request.Id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Hubo un error al intentar la Geolocalización.Error: " + ex.Message);
             }
 
-            var id = _service.SaveGeoRequest(body);
-
-            PeticionGeolocalizacion request = new PeticionGeolocalizacion() {
-                Id = id,
-                Calle = body.Calle, 
-                Numero = body.Numero, 
-                Ciudad = body.Ciudad,
-                Codigo_postal = body.Codigo_postal,
-                Provincia = body.Provincia,
-                Pais = body.Pais
-            };
-
-            _amqp.PublishGeolocalizacion(request);
-
-
-            return Ok(request.Id);
         }
 
-
+        [Route("Geocodificar")]
         [HttpGet]
-        public string GetGeo(string id)
+        public ActionResult Geocodificar(int id)
         {
-            //return "APIGEO";
-            id = (id == null) ? string.Empty : id;
+            try
+            {
+                if(id == 0)
+                    return BadRequest("Se debe ingresar un ID válido.");
 
+                GeocodificacionDTO geocodificacion =  _service.GetGeocodificacionById(id);
 
+                return Ok(geocodificacion);
 
-            return "id: " + id;
+            }
+            catch (Exception ex)
+            {
+                return  StatusCode(500,ex.Message);
+            }
+            
         }
-        //actualiza db tras respuesta del servicio de geocodificacion -metodo aparte
+
+
+
+        //public Task UpdateGeocodificacion()
+        //{
+           
+                  ////actualiza db tras respuesta del servicio de geocodificacion - NUEVO METODO
+
+        //}
     }
 }
 
