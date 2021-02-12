@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using APIGEO.DTO;
 using APIGEO.Interfaces;
+using APIGEO.Models;
 using APIGEO.Services;
 using Common.Mensajes;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +41,7 @@ namespace MS.APIGEO.Controllers
 
                 if (body == null)
                 {
-                    return BadRequest();
+                    return BadRequest("Datos incorrectos.");
                 }
 
                 var id = _service.SaveGeoRequest(body);
@@ -63,7 +64,7 @@ namespace MS.APIGEO.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Hubo un error al intentar la Geolocalización.Error: " + ex.Message);
+                return StatusCode(500, "Falló la petición de Geolocalización. Error: " + ex.Message);
             }
 
         }
@@ -91,12 +92,23 @@ namespace MS.APIGEO.Controllers
 
 
 
-        //public Task UpdateGeocodificacion()
-        //{
-           
-                  ////actualiza db tras respuesta del servicio de geocodificacion - NUEVO METODO
+        public Task UpdateGeocodificacion()
+        {
 
-        //}
+            RespuestaGeocodificacion rta = _amqp.ConsumeGeoCodificacion();
+
+            RespuestaGeocodificacion geocodificacion = new RespuestaGeocodificacion()
+            {
+                Id = rta.Id,
+                Latitud = rta.Latitud,
+                Longitud = rta.Longitud,
+                Estado = "Terminado"
+            };
+
+            _service.UpdateGeoRequest(geocodificacion);
+
+            
+        }
     }
 }
 

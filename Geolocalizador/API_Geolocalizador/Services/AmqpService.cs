@@ -62,6 +62,28 @@ namespace APIGEO.Services
                     );
                 }
             }
+        } 
+        
+        public void ConsumeGeoCodificacion(PeticionGeolocalizacion request)
+        {
+            using (var conn = connectionFactory.CreateConnection())
+            {
+                using (var channel = conn.CreateModel())
+                {
+                    channel.QueueDeclare(
+                        queue: QueueRequest,
+                        durable: false,
+                        exclusive: false,
+                        autoDelete: false,
+                        arguments: null
+                    );
+
+                    var jsonPayload = JsonConvert.SerializeObject(request);
+                    var body = Encoding.UTF8.GetBytes(jsonPayload);
+
+                    channel.BasicConsume(QueueResponse, true, this);
+                }
+            }
         }
     }
 }
