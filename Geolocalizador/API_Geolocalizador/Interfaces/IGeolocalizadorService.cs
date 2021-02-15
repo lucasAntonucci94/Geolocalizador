@@ -11,7 +11,7 @@ namespace APIGEO.Interfaces
     public interface IGeolocalizadorService
     {
         int SaveGeoRequest(GeolocalizacionDTO body);
-        void UpdateGeoRequest(GeolocalizacionDTO body);
+        //void UpdateGeoRequest(GeolocalizacionDTO body);
         GeocodificacionDTO GetGeocodificacionById(int id);
     }
 }

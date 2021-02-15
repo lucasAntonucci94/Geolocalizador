@@ -92,23 +92,23 @@ namespace MS.APIGEO.Controllers
 
 
 
-        public Task UpdateGeocodificacion()
-        {
+        //public Task UpdateGeocodificacion()
+        //{
 
-            RespuestaGeocodificacion rta = _amqp.ConsumeGeoCodificacion();
+        //    RespuestaGeocodificacion rta = _amqp.ConsumeGeoCodificacion();
 
-            RespuestaGeocodificacion geocodificacion = new RespuestaGeocodificacion()
-            {
-                Id = rta.Id,
-                Latitud = rta.Latitud,
-                Longitud = rta.Longitud,
-                Estado = "Terminado"
-            };
+        //    RespuestaGeocodificacion geocodificacion = new RespuestaGeocodificacion()
+        //    {
+        //        Id = rta.Id,
+        //        Latitud = rta.Latitud,
+        //        Longitud = rta.Longitud,
+        //        Estado = "Terminado"
+        //    };
 
-            _service.UpdateGeoRequest(geocodificacion);
+        //    _service.UpdateGeoRequest(geocodificacion);
 
             
-        }
+        //}
     }
 }
 

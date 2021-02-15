@@ -1,5 +1,7 @@
 version: '3.8'
 
+--DOCKER EXAMPLE. NO se utiliza para el ejercicio.
+
 services:
   geoApi:
     build: ./API_Geolocalizador

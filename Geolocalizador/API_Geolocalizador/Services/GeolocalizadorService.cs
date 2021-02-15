@@ -64,18 +64,18 @@ namespace APIGEO.Services
             return geocodificacion;
    
         }
-        public void UpdateGeoRequest(RespuestaGeocodificacion body)
-        {
-            GeolocalizacionDB geolocalizacion = new GeolocalizacionDB()
-            { 
-                Id = body.Id,
-                Latitud = body.Latitud,
-                Longitud = body.Longitud,
-                Estado = "Terminado"
-            };
+        //public void UpdateGeoRequest(RespuestaGeocodificacion body)
+        //{
+        //    GeolocalizacionDB geolocalizacion = new GeolocalizacionDB()
+        //    { 
+        //        Id = body.Id,
+        //        Latitud = body.Latitud,
+        //        Longitud = body.Longitud,
+        //        Estado = "Terminado"
+        //    };
 
-            _db.Geolocalizacion.Add(geolocalizacion);
-            _db.SaveChanges();
-        }
+        //    _db.Geolocalizacion.Add(geolocalizacion);
+        //    _db.SaveChanges();
+        //}
     }
 }

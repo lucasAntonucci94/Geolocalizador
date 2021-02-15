@@ -1,17 +1,8 @@
-﻿using APIGEO.Data;
-using APIGEO.DTO;
-using APIGEO.Interfaces;
-using APIGEO.Models;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using MS.APIGEO;
+﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Common.Helpers;
 using Common.Mensajes;
 
@@ -64,26 +55,25 @@ namespace APIGEO.Services
             }
         } 
         
-        public void ConsumeGeoCodificacion(PeticionGeolocalizacion request)
-        {
-            using (var conn = connectionFactory.CreateConnection())
-            {
-                using (var channel = conn.CreateModel())
-                {
-                    channel.QueueDeclare(
-                        queue: QueueRequest,
-                        durable: false,
-                        exclusive: false,
-                        autoDelete: false,
-                        arguments: null
-                    );
+        //public void ConsumeGeoCodificacion(PeticionGeolocalizacion request)
+        //{
+        //    using (var conn = connectionFactory.CreateConnection())
+        //    {
+        //        using (var channel = conn.CreateModel())
+        //        {
+        //            channel.QueueDeclare(
+        //                queue: QueueRequest,
+        //                durable: false,
+        //                exclusive: false,
+        //                autoDelete: false,
+        //                arguments: null
+        //            );
 
-                    var jsonPayload = JsonConvert.SerializeObject(request);
-                    var body = Encoding.UTF8.GetBytes(jsonPayload);
-
-                    channel.BasicConsume(QueueResponse, true, this);
-                }
-            }
-        }
+        //            var jsonPayload = JsonConvert.SerializeObject(request);
+        //            var body = Encoding.UTF8.GetBytes(jsonPayload);
+        //            channel.BasicConsume(QueueResponse,true,"ConsumidorTAG",consumer);
+        //        }
+        //    }
+        //}
     }
 }
